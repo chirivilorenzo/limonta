@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../JS/checkAutenticato.js"></script>
+        <script>
+            $("document").ready(function(){
+                $("#all").hide();   //da cambiare nel css
+                controllaAutenticato();
+            });
+
+            function visualizzaTutto(){
+                $("#all").show();
+
+                //visualizzare la tabella con i tickets
+                $.get("../PHP/getTickets.php", {}, function(data){
+                    for(let i = 0; i < data.length; i++){
+                        aggiungiTabella(data[i]["emailCliente"], data[i]["stato"], data[i]["area"], data[i]["dataApertura"], data[i]["categoria"]);
+                    }
+                });
+            }
+
+            function aggiungiTabella(email, stato, area, dataApertura, categoria){
+                let rigaDOM = $("<tr></tr>");
+                let cellaEmailDOM = $("<td></td>");
+                let cellaStatoDOM = $("<td></td>");
+                let cellaAreaDOM = $("<td></td>");
+                let cellaDataDOM = $("<td></td>");
+                let cellaCategoriaDOM = $("<td></td>");
+
+                let spanEmailDOM = $("<span>" + email + "</span>");
+                let spanStatoDOM = $("<span>" + stato + "</span>");
+                let spanAreaDOM = $("<span>" + area + "</span>");
+                let spanDataDOM = $("<span>" + dataApertura + "</span>");
+                let spanCategoriaDOM = $("<span>" + categoria + "</span>");
+
+                cellaEmailDOM.append(spanAreaDOM);
+                cellaStatoDOM.append(spanStatoDOM);
+                cellaAreaDOM.append(spanAreaDOM);
+                cellaDataDOM.append(spanDataDOM);
+                cellaCategoriaDOM.append(spanCategoriaDOM);
+
+                
+            }
+        </script>
+    </head>
+    <body>
+        <div id="all">
+            <table id="tickets"></table>
+        </div>
+    </body>
+</html>
