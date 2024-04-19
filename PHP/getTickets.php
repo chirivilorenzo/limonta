@@ -8,7 +8,7 @@
         $classeDB = new CDatabase();
         $classeDB->connessione();
 
-        $query = "SELECT * FROM tickets";
+        $query = "SELECT * FROM ticket";
         $result = $classeDB->seleziona($query);
 
         if($result != "errore" && $result != "vuoto"){
@@ -21,5 +21,5 @@
         echo json_encode($tickets);
     }
     else{
-        echo json_encode(array("status"=> "error"), "message"=> "non abilitato");
+        echo json_encode(array("status"=> "error", "message"=> "non abilitato"));
     }

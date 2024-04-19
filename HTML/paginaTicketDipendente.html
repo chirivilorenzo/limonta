@@ -39,13 +39,25 @@
                 cellaDataDOM.append(spanDataDOM);
                 cellaCategoriaDOM.append(spanCategoriaDOM);
 
-                
+                rigaDOM.append(cellaEmailDOM);
+                rigaDOM.append(cellaStatoDOM);
+                rigaDOM.append(cellaAreaDOM);
+                rigaDOM.append(cellaDataDOM);
+                rigaDOM.append(cellaCategoriaDOM);
+
+                $("#tickets").append(rigaDOM);
             }
         </script>
     </head>
     <body>
         <div id="all">
-            <table id="tickets"></table>
+            <table id="tickets" style="border: 1px solid black;">
+                <th>email</th>
+                <th>stato</th>
+                <th>area</th>
+                <th>data apertura</th>
+                <th>categoria</th>
+            </table>
         </div>
     </body>
 </html>
