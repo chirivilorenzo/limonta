@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+            $("document").ready(function(){
+                $("#login").click(function(){
+                    verificaUtente();
+                });
+            });
+
+            function verificaUtente(){
+                let user = $("#username").val();
+                let psw = $("#password").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "../PHP/loginCliente.php",
+                    data: {username: user, password: psw},
+                    success: function(response){
+                        if(response["status"] == "200"){
+                            window.location.href = "paginaTicketCliente.html";
+                        }
+                        else if(response["status"] == "admin"){
+                            window.location.href = "paginaAdmin.html";
+                        }
+                        else{
+                            alert(response["status"] + ": " + response["message"]);
+                        }
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        username cliente: <input type="text" id="username"><br>
+        password cliente: <input type="password" id="password"><br>
+        <button id="login">login</button>
+    </body>
+</html>

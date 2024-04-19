@@ -14,11 +14,11 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "../PHP/login.php",
+                    url: "../PHP/loginDipendente.php",
                     data: {username: user, password: psw},
                     success: function(response){
                         if(response["status"] == "200"){
-                            window.location.href = "visualizzaTicket";
+                            window.location.href = "paginaTicketDipendente.html";
                         }
                         else if(response["status"] == "admin"){
                             window.location.href = "paginaAdmin.html";
@@ -32,8 +32,8 @@
         </script>
     </head>
     <body>
-        username: <input type="text" id="username"><br>
-        password: <input type="password" id="password"><br>
+        username dipendente: <input type="text" id="username"><br>
+        password dipendente: <input type="password" id="password"><br>
         <button id="login">login</button>
     </body>
 </html>
