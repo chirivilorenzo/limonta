@@ -19,7 +19,7 @@
                 });
             }
 
-            function aggiungiTabella(email, stato, area, dataApertura, categoria){
+            function aggiungiTabella(email, stato, area , dataApertura, categoria){
                 let rigaDOM = $("<tr></tr>");
                 let cellaEmailDOM = $("<td></td>");
                 let cellaStatoDOM = $("<td></td>");
@@ -33,7 +33,7 @@
                 let spanDataDOM = $("<span>" + dataApertura + "</span>");
                 let spanCategoriaDOM = $("<span>" + categoria + "</span>");
 
-                cellaEmailDOM.append(spanAreaDOM);
+                cellaEmailDOM.append(spanEmailDOM);
                 cellaStatoDOM.append(spanStatoDOM);
                 cellaAreaDOM.append(spanAreaDOM);
                 cellaDataDOM.append(spanDataDOM);

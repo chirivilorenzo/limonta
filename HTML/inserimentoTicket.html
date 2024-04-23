@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="../JS/checkAutenticato.js"></script>
+        <script>
+            $("document").ready(function(){
+                $("#cercaCliente").click(function(){
+                    cercaCliente();
+                });
+            });
+
+            function cercaCliente(){
+                let codCliente = $("#codCliente").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "../PHP/cercaCliente.php",
+                    data: {codCliente: codCliente},
+                    success: function(response){
+                        if(response["status"] == "200"){
+                            modificaDatiCliente(response["nome"], response["cognome"], response["telefono"], response["email"]);
+                        }
+                    }
+                });
+            }
+
+            function modificaDatiCliente(nome, cognome, telefono, email){
+                $("#nome").val(nome);
+                $("#cognome").val(cognome);
+                $("#telefono").val(telefono);
+                $("#email").val(email);
+            }
+        </script>
+
+    </head>
+    <body>
+        richiesta assistenza per area:<br>
+        <select id="area">
+            <option value="Area PC e reti">Area PC e reti</option>
+            <option value="AS400">AS400</option>
+            <option value="Java">Java</option>
+            <option value="Contabilita">Contabilità</option>
+            <option value="Formatori">Formatori</option>
+            <option value="Derma">Derma</option>
+            <option value="Terzisti">Terzisti</option>
+            <option value="Commerciali">Commerciali</option>
+        </select><br><br>
+
+        codice cliente:<br>
+        <input type="text" id="codCliente"><button id="cercaCliente">Cerca</button><br><br>
+
+        nome cliente:<br>
+        <input type="text" id="nome"><br><br>
+
+        cognome cliente:<br>
+        <input type="text" id="cognome"><br><br>
+
+        telefono cliente:<br>
+        <input type="text" id="telefono"><br><br>
+
+        email cliente:<br>
+        <input type="text" id="email"><br><br>
+    </body>
+</html>
