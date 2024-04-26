@@ -7,6 +7,10 @@
                 $("#cercaCliente").click(function(){
                     cercaCliente();
                 });
+
+                $("#salva").click(function(){
+                    salvaTicket();
+                });
             });
 
             function cercaCliente(){
@@ -29,6 +33,22 @@
                 $("#cognome").val(cognome);
                 $("#telefono").val(telefono);
                 $("#email").val(email);
+            }
+
+            function salvaTicket(){
+                $.ajax({
+                    type: "POST",
+                    url: "../PHP/inserimentoTicket.php",
+                    data: {},
+                    success: function(response){
+                        if(response["status"] == "200"){
+                            alert(response["message"]);
+                        }
+                        else{
+                            alert(response["status"] + ": " + response["message"]);
+                        }
+                    }
+                });
             }
         </script>
 
@@ -60,5 +80,11 @@
 
         email cliente:<br>
         <input type="text" id="email"><br><br>
+
+        data e ora apertura:<br>
+        <input type="date" id="data">
+        <input type="time" id="ora"><br><br>
+
+        <button id="salva">salva ticket</button>
     </body>
 </html>
