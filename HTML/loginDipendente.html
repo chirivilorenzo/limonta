@@ -12,21 +12,13 @@
                 let user = $("#username").val();
                 let psw = $("#password").val();
 
-                $.ajax({
-                    type: "POST",
-                    url: "../PHP/loginDipendente.php",
-                    data: {username: user, password: psw},
-                    success: function(response){
-                        if(response["status"] == "200"){
-                            window.location.href = "paginaTicketDipendente.html";
-                        }
-                        else if(response["status"] == "admin"){
-                            window.location.href = "paginaAdmin.html";
+                $.post("../PHP/loginDipendente.php", {username: user, password: psw}, function(response){
+                    if(response["status"] == "200"){
+                            window.location.href = "visualizzaDipendente.html";
                         }
                         else{
                             alert(response["status"] + ": " + response["message"]);
                         }
-                    }
                 });
             }
         </script>
