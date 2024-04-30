@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+
+            $("document").ready(function(){
+                $("#all").hide();
+                controllaAutenticato();
+            });
+
+
+            function controllaAutenticato(){
+                $.post("../PHP/checkAutenticato.php", {}, function(response){
+                    if(response["status"] == "200"){
+                            visualizzaTutto();
+                    }
+                    else{
+                        alert(response["status"] + ": " + response["message"]);
+                    }
+                });
+            }
+
+            function visualizzaTutto(){
+                $("#all").show();
+
+
+            }
+        </script>
+    </head>
+    <body>
+
+        <div id="all">
+            stato:<br>
+            <select id="stato">
+                <option value="aperto" selected>aperto</option>
+                <option value="chiuso">chiuso</option>
+                <option value="sospeso">sospeso</option>
+                <option value="annullato">annullato</option>
+            </select><br><br>
+
+
+            richiesta assistenza per area:<br>
+            <select id="area">
+                <option value="Area PC e reti">Area PC e reti</option>
+                <option value="AS400">AS400</option>
+                <option value="Java">Java</option>
+                <option value="Contabilita">Contabilità</option>
+                <option value="Formatori">Formatori</option>
+                <option value="Derma">Derma</option>
+                <option value="Terzisti">Terzisti</option>
+                <option value="Commerciali">Commerciali</option>
+            </select><br><br>
+
+            breve descrizione:<br>
+            <input type="text" id="breveDescrizione"><br><br>
+
+            descrizione:<br>
+            <input type="text" id="descrizione"><br><br>
+
+            data apertura:<br>
+            <input type="date"><input type="time"><br><br>
+        </div>
+    </body>
+</html>
