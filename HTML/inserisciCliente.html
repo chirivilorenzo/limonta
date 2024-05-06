@@ -1,10 +1,19 @@
 <html>
     <head>
+        <style>
+            #all {
+                display: none;
+            }
+        </style>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
 
             $("document").ready(function(){
-                $("#all").hide();
+
+                $("#invia").click(function(){
+                    inviaTicket();
+                });
+
                 controllaAutenticato();
             });
 
@@ -12,7 +21,7 @@
             function controllaAutenticato(){
                 $.post("../PHP/checkAutenticato.php", {}, function(response){
                     if(response["status"] == "200"){
-                            visualizzaTutto();
+                        visualizzaTutto();
                     }
                     else{
                         alert(response["status"] + ": " + response["message"]);
@@ -22,8 +31,24 @@
 
             function visualizzaTutto(){
                 $("#all").show();
+            }
 
-
+            function inviaTicket(){
+                let stato = $("#stato").val();
+                let area = $("#area").val();
+                let descBreve = $("#breveDescrizione").val();
+                let descrizione = $("#descrizione").val();
+                let data = $("#data").val();
+                let ora = $("#ora").val();
+                
+                $.post("../PHP/inserisciCliente.php", {stato: stato, area: area, descBreve: descBreve, descrizione: descrizione, data: data, ora: ora}, function(response){
+                    if(response["status"] == "200"){
+                        alert("ticket inserito correttamente");
+                    }
+                    else{
+                        alert(response["status"] + ": " + response["message"]);
+                    }
+                });
             }
         </script>
     </head>
@@ -58,7 +83,9 @@
             <input type="text" id="descrizione"><br><br>
 
             data apertura:<br>
-            <input type="date"><input type="time"><br><br>
+            <input type="date" id="data"><input type="time" id="ora"><br><br>
+
+            <button id="invia">invia</button>
         </div>
     </body>
 </html>

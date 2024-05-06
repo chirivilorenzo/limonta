@@ -47,6 +47,7 @@
                 return true;
             }
             else{
+                echo $stmt->error;
                 $stmt->close();
                 return false;
             }
