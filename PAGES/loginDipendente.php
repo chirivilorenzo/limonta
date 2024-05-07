@@ -15,7 +15,7 @@
 
                 $.post("../AJAX/loginDipendente.php", {username: user, password: psw}, function(response){
                     if(response["status"] == "200"){
-                        window.location.href = "gestioneTicketDipendente.php";
+                        window.location.href = "visualizzaDipendente.php";
                     }
                     else{
                         alert(response["status"] + ": " + response["message"]);
