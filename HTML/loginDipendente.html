@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link rel="stylesheet" href="../CSS/style_login.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
             $("document").ready(function(){
@@ -14,18 +15,26 @@
 
                 $.post("../PHP/loginDipendente.php", {username: user, password: psw}, function(response){
                     if(response["status"] == "200"){
-                            window.location.href = "visualizzaDipendente.html";
-                        }
-                        else{
-                            alert(response["status"] + ": " + response["message"]);
-                        }
+                        window.location.href = "visualizzaDipendente.html";
+                    }
+                    else{
+                        alert(response["status"] + ": " + response["message"]);
+                    }
                 });
             }
         </script>
     </head>
     <body>
-        username dipendente: <input type="text" id="username"><br>
-        password dipendente: <input type="password" id="password"><br>
-        <button id="login">login</button>
+        <div class="container">
+            <div class="input-group">
+                <label for="username">Username dipendente:</label>
+                <input type="text" id="username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password dipendente:</label>
+                <input type="password" id="password">
+            </div>
+            <button id="login">Login</button>
+        </div>
     </body>
 </html>
