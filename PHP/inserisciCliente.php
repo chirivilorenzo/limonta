@@ -6,9 +6,6 @@
         session_start();
     }
 
-    //codice cliente lo si prende dalla sessione
-    //il resto dalla chiamata ajax
-
     if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         $stato = $_POST["stato"];
@@ -22,10 +19,10 @@
         $classeDB = new CDatabase();
         $classeDB->connessione();
 
-        $query = "INSERT INTO aperturaticket (codiceCliente, stato, area, breveDescrizione, descrizione, dataApertura) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO aperturaticket (IDcliente, stato, area, breveDescrizione, descrizione, dataApertura) VALUES (?, ?, ?, ?, ?, ?)";
 
         
-        if($classeDB->inserisci($query, $_SESSION["codCliente"], $stato, $area, $descBreve, $descrizione, $datetime)){
+        if($classeDB->inserisci($query, $_SESSION["IDcliente"], $stato, $area, $descBreve, $descrizione, $datetime)){
             echo json_encode(array("status"=>"200"));
         }
         else{

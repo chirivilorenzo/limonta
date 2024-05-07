@@ -23,7 +23,7 @@
 
 
         if($result != "errore" && $result != "vuoto"){
-            $_SESSION["idDipendente"] = $result[0]["ID"];
+            $_SESSION["IDdipendente"] = $result[0]["ID"];
             echo json_encode(array("status" => "200"));
         }
         else if($result == "vuoto"){

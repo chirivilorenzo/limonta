@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 30, 2024 alle 12:18
+-- Creato il: Mag 07, 2024 alle 11:26
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -29,20 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `aperturaticket` (
   `ID` int(11) NOT NULL,
-  `codiceCliente` char(6) NOT NULL,
+  `IDcliente` int(11) NOT NULL,
   `stato` enum('aperto','chiuso','sospeso','annullato') NOT NULL,
   `area` enum('Area PC e reti','AS400','Java','Contabilità','Formatori','Derma','Terzisti','Commerciali') NOT NULL,
   `breveDescrizione` varchar(64) NOT NULL,
   `descrizione` text NOT NULL,
   `dataApertura` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dump dei dati per la tabella `aperturaticket`
---
-
-INSERT INTO `aperturaticket` (`ID`, `codiceCliente`, `stato`, `area`, `breveDescrizione`, `descrizione`, `dataApertura`) VALUES
-(1, 'gg1234', 'aperto', 'Area PC e reti', '', 'no', '2024-04-19 13:48:53');
 
 -- --------------------------------------------------------
 
@@ -67,7 +60,6 @@ CREATE TABLE `chiusuraticket` (
 
 CREATE TABLE `cliente` (
   `ID` int(11) NOT NULL,
-  `codice` char(6) NOT NULL,
   `nome` varchar(16) NOT NULL,
   `cognome` varchar(32) NOT NULL,
   `username` varchar(16) NOT NULL,
@@ -80,8 +72,8 @@ CREATE TABLE `cliente` (
 -- Dump dei dati per la tabella `cliente`
 --
 
-INSERT INTO `cliente` (`ID`, `codice`, `nome`, `cognome`, `username`, `password`, `email`, `numTelefono`) VALUES
-(1, 'gg1234', 'a', 'a', 'mario', 'rossi', 'gg@gmail.com', '12');
+INSERT INTO `cliente` (`ID`, `nome`, `cognome`, `username`, `password`, `email`, `numTelefono`) VALUES
+(1, 'a', 'a', 'mario', 'rossi', 'gg@gmail.com', '12');
 
 -- --------------------------------------------------------
 
@@ -126,8 +118,7 @@ CREATE TABLE `dipendente_ticket` (
 --
 ALTER TABLE `aperturaticket`
   ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `emailCliente` (`codiceCliente`),
-  ADD UNIQUE KEY `codiceCliente` (`codiceCliente`);
+  ADD KEY `idCliene` (`IDcliente`);
 
 --
 -- Indici per le tabelle `chiusuraticket`
@@ -143,9 +134,7 @@ ALTER TABLE `chiusuraticket`
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`,`numTelefono`),
-  ADD UNIQUE KEY `codice` (`codice`),
-  ADD KEY `codice_2` (`codice`);
+  ADD UNIQUE KEY `email` (`email`,`numTelefono`);
 
 --
 -- Indici per le tabelle `dipendente`
@@ -199,7 +188,7 @@ ALTER TABLE `dipendente`
 -- Limiti per la tabella `aperturaticket`
 --
 ALTER TABLE `aperturaticket`
-  ADD CONSTRAINT `aperturaticket_ibfk_4` FOREIGN KEY (`codiceCliente`) REFERENCES `cliente` (`codice`);
+  ADD CONSTRAINT `aperturaticket_ibfk_1` FOREIGN KEY (`IDcliente`) REFERENCES `cliente` (`ID`);
 
 --
 -- Limiti per la tabella `chiusuraticket`
