@@ -19,15 +19,15 @@
 
 
             function logout(){
-                $.get("../PHP/logout.php", {}, function(response){
+                $.get("../AJAX/logout.php", {}, function(response){
                     alert("logout effettuato");
-                    window.location.href = "loginCliente.html";
+                    window.location.href = "loginCliente.php";
                 });
             }
 
 
             function controllaAutenticato(){
-                $.post("../PHP/checkAutenticato.php", {}, function(response){
+                $.post("../AJAX/checkAutenticato.php", {}, function(response){
                     if(response["status"] == "200"){
                         visualizzaTutto();
                     }
@@ -49,7 +49,7 @@
                 let data = $("#data").val();
                 let ora = $("#ora").val();
                 
-                $.post("../PHP/inserisciCliente.php", {stato: stato, area: area, descBreve: descBreve, descrizione: descrizione, data: data, ora: ora}, function(response){
+                $.post("../AJAX/inserisciCliente.php", {stato: stato, area: area, descBreve: descBreve, descrizione: descrizione, data: data, ora: ora}, function(response){
                     if(response["status"] == "200"){
                         alert("ticket inserito correttamente");
                     }

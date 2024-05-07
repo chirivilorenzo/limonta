@@ -13,25 +13,25 @@
                 let user = $("#username").val();
                 let psw = $("#password").val();
 
-                $.post("../PHP/loginDipendente.php", {username: user, password: psw}, function(response){
+                $.post("../AJAX/loginCliente.php", {username: user, password: psw}, function(response){
                     if(response["status"] == "200"){
-                        window.location.href = "visualizzaDipendente.html";
+                        window.location.href = "inserisciCliente.php";
                     }
                     else{
                         alert(response["status"] + ": " + response["message"]);
                     }
                 });
             }
-        </script>
+        </script>   
     </head>
     <body>
         <div class="container">
             <div class="input-group">
-                <label for="username">Username dipendente:</label>
+                <label for="username">Username cliente:</label>
                 <input type="text" id="username">
             </div>
             <div class="input-group">
-                <label for="password">Password dipendente:</label>
+                <label for="password">Password cliente:</label>
                 <input type="password" id="password">
             </div>
             <button id="login">Login</button>
