@@ -10,8 +10,20 @@
                     inviaTicket();
                 });
 
+                $("#logout").click(function(){
+                    logout();
+                });
+
                 controllaAutenticato();
             });
+
+
+            function logout(){
+                $.get("../PHP/logout.php", {}, function(response){
+                    alert("logout effettuato");
+                    window.location.href = "loginCliente.html";
+                });
+            }
 
 
             function controllaAutenticato(){
@@ -84,7 +96,8 @@
                 data apertura:<br>
                 <input type="date" id="data"><input type="time" id="ora"><br><br>
 
-                <button id="invia">invia</button>
+                <button id="invia">invia</button><br><br>
+                <button id="logout">logout</button>
             </div>
         </div>
     </body>

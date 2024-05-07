@@ -5,10 +5,10 @@
 
     header('Content-Type: application/json');
 
-    if(isset($_SESSION["idCliente"])){
+    if(isset($_SESSION["IDcliente"])){
         echo json_encode(array("status"=> "200"));
     }
-    else if(isset($_SESSION["idDipendente"])){
+    else if(isset($_SESSION["IDdipendente"])){
         echo json_encode(array("status"=> "200"));
     }
     else{

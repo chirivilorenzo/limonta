@@ -1,4 +1,6 @@
-
+#all{
+    display: none;
+}
 
 body {
     font-family: Arial, sans-serif;
